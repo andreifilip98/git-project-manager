@@ -1,0 +1,26 @@
+
+
+Features:     TOTAL PRICE: 3100$
+
+-SignIn + SignUp (email auth) = 10h = 200$
+
+-Database storage (users + files) = 400$
+
+-Edit profile information = 6h = 100$
+
+-Projects: = 1200$
+	-Create own projects = 10h = 200$
+	-Project permissions = 6h = 120$ 
+	-Be a member on other projects = 6h = 120$
+	-Description = 5h = 100$
+	-Add + Delete members via email = 6h = 120$
+	-Create issue(title, description, color, priority, affected version, version to fix, attachments option) + Delete issue = 20h = 400$
+	-Edit issue = 4h = 80$
+	-Filter issue by priority(low, medium, high) = 3h = 60$
+
+-Friendly UI/UX = 10h = 200$
+
+-GitHub integrations (add, commit, push, merge) = 30h = 1000$
+	
+	
+ 
