@@ -1,6 +1,6 @@
 
 
-Features:     TOTAL PRICE: 4000$
+Features:     TOTAL PRICE: 4500$
 
 -SignIn + SignUp (email auth) = 10h = 200$
 
@@ -20,7 +20,7 @@ Features:     TOTAL PRICE: 4000$
 	-Edit issue = 4h = 80$
 	-Filter issue by priority(low, medium, high) = 3h = 60$
 
--Friendly UI/UX = 10h = 200$
+-Friendly UI/UX = 25h = 500$
 
 -GitHub integrations (add, commit, push, merge) = 30h = 1000$
 	
