@@ -1,8 +1,10 @@
 
 
-Features:     TOTAL PRICE: 3100$
+Features:     TOTAL PRICE: 4000$
 
 -SignIn + SignUp (email auth) = 10h = 200$
+
+-Mentenance = 900$
 
 -Database storage (users + files) = 400$
 
@@ -14,7 +16,7 @@ Features:     TOTAL PRICE: 3100$
 	-Be a member on other projects = 6h = 120$
 	-Description = 5h = 100$
 	-Add + Delete members via email = 6h = 120$
-	-Create issue(title, description, color, priority, affected version, version to fix, attachments option) + Delete issue = 20h = 400$
+	-Create issue(title, description, colour, priority, affected version, version to fix, attachments option) + Delete issue = 20h = 400$
 	-Edit issue = 4h = 80$
 	-Filter issue by priority(low, medium, high) = 3h = 60$
 
