@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.47f94133.chunk.css",
+    "main.js": "/static/js/main.c4ad778a.chunk.js",
+    "main.js.map": "/static/js/main.c4ad778a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.f3a16f46.js",
+    "runtime-main.js.map": "/static/js/runtime-main.f3a16f46.js.map",
+    "static/css/2.73d79842.chunk.css": "/static/css/2.73d79842.chunk.css",
+    "static/js/2.8a12930d.chunk.js": "/static/js/2.8a12930d.chunk.js",
+    "static/js/2.8a12930d.chunk.js.map": "/static/js/2.8a12930d.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.883667bb21045c007306d3cdfcc18816.js": "/precache-manifest.883667bb21045c007306d3cdfcc18816.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.73d79842.chunk.css.map": "/static/css/2.73d79842.chunk.css.map",
+    "static/css/main.47f94133.chunk.css.map": "/static/css/main.47f94133.chunk.css.map",
+    "static/js/2.8a12930d.chunk.js.LICENSE.txt": "/static/js/2.8a12930d.chunk.js.LICENSE.txt",
+    "static/media/pe-icon-7-stroke.css": "/static/media/Pe-icon-7-stroke.c45f7de0.svg",
+    "static/media/reactlogo.png": "/static/media/reactlogo.e6b32f13.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f3a16f46.js",
+    "static/css/2.73d79842.chunk.css",
+    "static/js/2.8a12930d.chunk.js",
+    "static/css/main.47f94133.chunk.css",
+    "static/js/main.c4ad778a.chunk.js"
+  ]
+}

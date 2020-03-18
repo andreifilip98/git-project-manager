@@ -1,0 +1,12 @@
+-an explanation of what your software does and what problem it solves
+-an example illustrating the circumstances in which your code would normally be used
+-links to the code and bugs tracker
+-FAQs and ways to ask for support
+-instructions on how to install your software
+-license information
+
+Requirements – Statements that identify attributes, capabilities, characteristics, or qualities of a system. This is the foundation for what will be or has been implemented.
+Architecture/Design – Overview of software. Includes relations to an environment and construction principles to be used in design of software components.
+Technical – Documentation of code, algorithms, interfaces, and APIs.
+End user – Manuals for the end-user, system administrators and support staff.
+Marketing – How to market the product and analysis of the market demand.
