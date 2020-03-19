@@ -15,6 +15,7 @@ export class UserCard extends Component {
               {/*  src={this.props.avatar}*/}
               {/*  alt="..."*/}
               {/*/>*/}
+              <img src={'https://avatars1.githubusercontent.com/u/48677174?v=4'} alt="Logo" style={{height:"1", weight:"1"}}/>
               <h4 className="title">
                 {this.props.name}
                 <br />

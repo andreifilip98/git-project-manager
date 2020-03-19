@@ -18,7 +18,7 @@ import Axios from "axios"
 import SignIn from "./SignIn";
 
 const base_url = 'http://127.0.0.1:8000/';
-
+const GITHUB_URL = 'https://api.github.com/users/';
 
 function getFirstName() {
 
@@ -94,6 +94,15 @@ function getNewGithubAccount() {
 
 }
 
+function getGitHubAccount() {
+    fetch(GITHUB_URL + 'andreifilip98', {
+        method : 'GET',
+        headers : {
+            Authorization : `JWT ${localStorage.getItem('token')}`
+        }
+    }).then(result => console.log(result.json()));
+}
+
 function updateCurrentUserData() {
     Axios.post(base_url + 'user/update_user/', {
         'old_username': getOldUsername(),
@@ -136,6 +145,8 @@ class UserProfile extends Component {
                 console.log('id user curent:' + profile['user']);
                 localStorage.setItem('current_user', profile['user']);
             })
+
+        getGitHubAccount();
     }
 
     render() {
@@ -217,6 +228,9 @@ class UserProfile extends Component {
                                     <span>
                     "Project Manager/Normal User"
                   </span>
+                                }
+                                image={
+                                    <img src={'https://avatars1.githubusercontent.com/u/48677174?v=4'} alt="Logo" />
                                 }
                                 socials={
                                     <div>
