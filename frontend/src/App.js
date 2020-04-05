@@ -59,7 +59,7 @@ class App extends Component {
 
 	componentDidMount() {
 		if(this.state.logged_in){
-			fetch(base_url + 'user/current_user/', {
+			fetch(base_url + 'user/user/get_current_user', {
 				method : 'GET',
 				headers : {
 					Authorization : `JWT ${localStorage.getItem('token')}`

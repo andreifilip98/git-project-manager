@@ -1,17 +1,11 @@
 from .serializers import *
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import permissions
 
 
-@api_view(['GET'])
-def get_current_user(request):
-    serializer = GetFullUserSerializer(request.user)
-    return Response(serializer.data)
-
-
 class CreateUserView(APIView):
+
     permission_classes = (permissions.AllowAny, )
 
     def post(self, request):
@@ -29,7 +23,24 @@ class CreateUserView(APIView):
 class UpdateUserView(APIView):
     permission_classes = (permissions.AllowAny,)
 
+    def get_current_user(self, req):
+        serializer = GetFullUserSerializer(req.user)
+        return Response(serializer.data)
+
+    def get(self, request, *args, **kwargs):
+        """Get all current user's infos"""
+
+        function_called = self.kwargs.get('function_name')
+        if function_called == 'get_current_user':
+            return self.get_current_user(request)
+
     def post(self, request):
+        """Post all user's data and pass them to Profile model
+
+        Because user model doesn't provide all the data we need from an actual user of the app, we created a Profile
+        model which will contain the default user model and all the other infos we need
+        """
+
         current_user = User.objects.get(username=request.data.get('old_username'))
         current_user.username = request.data.get('username')
         current_user.first_name = request.data.get('first_name')
@@ -43,4 +54,4 @@ class UpdateUserView(APIView):
         current_user.profile.github_account = request.data.get('github')
 
         current_user.save()
-        return Response({"response": "success", "message": "user updated succesfully"})
+        return Response({"response": "success", "message": "user updated successfully"})

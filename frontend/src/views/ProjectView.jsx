@@ -99,7 +99,7 @@ class ProjectView extends Component {
         let projectName = (window.location.href).slice((window.location.href).lastIndexOf('/') + 1);
         let finalProjectName = projectName.split('%20').join(' ');
 
-        fetch(base_url + 'profile/add_member/', {
+        fetch(base_url + 'profile/update_project/add_member', {
             crossDomain : true,
             method : 'POST',
             headers : {
@@ -126,7 +126,7 @@ class ProjectView extends Component {
         let projectName = (window.location.href).slice((window.location.href).lastIndexOf('/') + 1);
         let finalProjectName = projectName.split('%20').join(' ');
 
-        await fetch(base_url + 'issue/get_issues/', {
+        await fetch(base_url + 'issue/issue/get_issues', {
             crossDomain : true,
             method : 'POST',
             headers : {
@@ -163,7 +163,7 @@ class ProjectView extends Component {
 
         localStorage.setItem('fetchInProgress','true')
 
-        await fetch(base_url + 'profile/get_project_members/', {
+        await fetch(base_url + 'profile/update_project/get_project_members', {
             crossDomain : true,
             method : 'POST',
             headers : {

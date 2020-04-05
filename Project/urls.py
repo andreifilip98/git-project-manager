@@ -1,14 +1,19 @@
 from django.urls import path
 
-from Profile.views import UpdateProject, UpdateProfile
+from profile.views import UpdateProject, UpdateProfile
 from .views import *
+
+"""
+Fields:
+    <name> & <project> - both are used for project references
+    <function_name> - decides with api will be used 
+"""
 
 urlpatterns = [
     path('create_project/', CreateProjectView.as_view()),
-    path('get_projects/', get_projects),
     path('update_project/<name>/', UpdateProject.as_view()),
-    path('get_other_projects/', get_other_projects),
-    path('get_project_pk/', get_project_pk),
+
+    path('project/<function_name>', CreateProjectView.as_view()),
 
     path('delete_project/<project>/', UpdateProfile.as_view()),
 ]

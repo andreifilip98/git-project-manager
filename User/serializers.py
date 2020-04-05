@@ -1,7 +1,7 @@
 from rest_framework import serializers as sz
 from rest_framework_jwt.serializers import User
 from rest_framework_jwt.settings import api_settings
-from Profile.serializers import ProfileSerializer
+from profile.serializers import ProfileSerializer
 
 
 class GetFullUserSerializer(sz.ModelSerializer):

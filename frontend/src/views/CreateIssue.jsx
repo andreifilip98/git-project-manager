@@ -114,7 +114,7 @@ function updateIssueFromDb(title, description, affected, fix, colour, priority) 
         let projectName = (window.location.href).slice((window.location.href).lastIndexOf('/') + 1);
         let finalProjectName = projectName.split('%20').join(' ');
 
-        fetch(base_url + 'project/get_project_pk/', {
+        fetch(base_url + 'project/project/get_project_pk', {
             crossDomain : true,
             method : 'POST',
             headers : {
@@ -195,7 +195,7 @@ class CreateIssue extends Component {
                 console.log("Attachment created!")
             })
             .then(() => {
-                fetch(base_url + 'attachment/get_last_attachment/', {
+                fetch(base_url + 'attachment/attachments/get_last_attachment', {
                     crossDomain : true,
                     method : 'GET',
                     headers : {
@@ -211,7 +211,7 @@ class CreateIssue extends Component {
                         let projectName = (window.location.href).slice((window.location.href).lastIndexOf('/') + 1);
                         let finalProjectName = projectName.split('%20').join(' ');
 
-                        fetch(base_url + 'project/get_project_pk/', {
+                        fetch(base_url + 'project/project/get_project_pk', {
                             crossDomain : true,
                             method : 'POST',
                             headers : {

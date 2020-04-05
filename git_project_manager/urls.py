@@ -22,11 +22,12 @@ from git_project_manager.views import home
 
 urlpatterns = [
     path('', home, name='home'),
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('token-auth/', obtain_jwt_token),
-    path('user/', include('User.urls')),
-    path('profile/', include('Profile.urls')),
-    path('project/', include('Project.urls')),
-    path('issue/', include('Issue.urls')),
-    path('attachment/', include('Attachment.urls')),
+    path('user/', include('user.urls')),
+    path('profile/', include('profile.urls')),
+    path('project/', include('project.urls')),
+    path('issue/', include('issue.urls')),
+    path('attachment/', include('attachment.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

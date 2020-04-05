@@ -20,6 +20,7 @@ import SignIn from "./SignIn";
 const base_url = 'http://127.0.0.1:8000/';
 const GITHUB_URL = 'https://api.github.com/users/';
 
+
 function getFirstName() {
 
     return localStorage.getItem('first_name');
@@ -49,6 +50,7 @@ function getGithubAccount() {
 
     return localStorage.getItem('github');
 }
+
 
 function getNewUsername() {
 

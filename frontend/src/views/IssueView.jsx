@@ -162,7 +162,7 @@ class IssueView extends Component {
 
         let file = this.state.issueTitle;
 
-        fetch(base_url + 'attachment/get_related_attachments/', {
+        fetch(base_url + 'attachment/attachments/get_attachments_related_to_issueTitle', {
             crossDomain : true,
             method : 'POST',
             headers : {

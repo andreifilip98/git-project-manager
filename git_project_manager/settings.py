@@ -36,16 +36,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admindocs',
 
     'rest_framework',
     'rest_framework.authtoken',  # <-- Here
     'corsheaders',
 
-    'User',
-    'Profile',
-    'Project',
-    'Issue',
-    'Attachment',
+    'user',
+    'profile',
+    'project',
+    'issue',
+    'attachment',
 
 ]
 
@@ -100,10 +101,10 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'nlekresz',
-        'USER': 'nlekresz',
-        'PASSWORD': 'xMi7gJOzv6QX2Z-ZLHKyhXHF0j4rO2x5',
-        'HOST': 'rajje.db.elephantsql.com',
+        'NAME': 'palgldor',
+        'USER': 'palgldor',
+        'PASSWORD': 'i9FrvVvRdLnS4KT7zNp-z6Xpnq5-qjqK',
+        'HOST': 'drona.db.elephantsql.com',
         'PORT': '5432',
     }
 }
@@ -131,7 +132,7 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=2),
     # 'JWT_ALLOW_REFRESH': True,
     # 'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'User.utils.custom_jwt_response_handler'
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'user.utils.custom_jwt_response_handler'
 
 }
 

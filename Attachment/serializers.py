@@ -14,6 +14,7 @@ class AttachmentSerializer(sz.ModelSerializer):
 
         return attachment
 
+
     class Meta:
         model = Attachment
         fields = ('file','created_by',)

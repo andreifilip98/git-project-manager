@@ -3,6 +3,8 @@ from .views import *
 
 urlpatterns = [
     path('create_user/', CreateUserView.as_view()),
-    path('current_user/', get_current_user),
+
+    path('user/<function_name>', UpdateUserView.as_view()),
+
     path('update_user/', UpdateUserView.as_view()),
 ]

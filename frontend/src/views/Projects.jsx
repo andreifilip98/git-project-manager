@@ -33,7 +33,7 @@ class Projects extends Component {
     fetchProjects() {
 
         // Fetch other projects
-        fetch(base_url + 'project/get_other_projects/', {
+        fetch(base_url + 'project/project/get_other_projects', {
             crossDomain : true,
             method : 'POST',
             headers : {
@@ -70,7 +70,7 @@ class Projects extends Component {
             })
             .then((res) => {
                 // Fetch project created by the current user
-                fetch(base_url + 'project/get_projects/', {
+                fetch(base_url + 'project/project/get_projects', {
                     method : 'GET',
                     headers : {
                         Authorization : `JWT ${localStorage.getItem('token')}`

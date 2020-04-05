@@ -13,7 +13,6 @@ class IssueSerializer(sz.ModelSerializer):
             fix=validated_data['fix'],
             colour=validated_data['colour'],
             priority=validated_data['priority'],
-            # attachments=validated_data['attachments']
         )
 
         issue.save()
