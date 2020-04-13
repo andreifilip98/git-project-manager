@@ -48,7 +48,7 @@ function getEmail() {
 
 function getGithubAccount() {
 
-    return localStorage.getItem('github');
+    return localStorage.getItem('gitUsername');
 }
 
 
@@ -97,7 +97,7 @@ function getNewGithubAccount() {
 }
 
 function getGitHubAccount() {
-    fetch(GITHUB_URL + 'andreifilip98', {
+    fetch(GITHUB_URL + localStorage.getItem('gitUsername'), {
         method : 'GET',
         headers : {
             Authorization : `JWT ${localStorage.getItem('token')}`
@@ -110,7 +110,8 @@ function getGitHubAccount() {
         });
 }
 
-function updateCurrentUserData() {
+function updateCurrentUserData()
+{
     Axios.post(base_url + 'user/update_user/', {
         'old_username': getOldUsername(),
         'username': getNewUsername(),
@@ -132,15 +133,14 @@ function updateCurrentUserData() {
     localStorage.setItem('first_name', getNewFirstName());
     localStorage.setItem('last_name', getNewLastName());
     localStorage.setItem('email', getNewEmail());
-    localStorage.setItem('github', getNewGithubAccount());
+    localStorage.setItem('gitUsername', getNewGithubAccount());
 
 }
-
 
 class UserProfile extends Component {
 
     componentDidMount() {
-        fetch(base_url + 'profile/current_profile/', {
+        fetch(base_url + 'profile/update_profile/get_current_profile', {
             method : 'GET',
             headers : {
                 Authorization : `JWT ${localStorage.getItem('token')}`
@@ -149,7 +149,9 @@ class UserProfile extends Component {
             .then(res => res.json())
             .then(profile => {
                 console.log('id user curent:' + profile['user']);
-                // localStorage.setItem('current_user', profile['user']);
+                localStorage.setItem('current_user', profile['user']);
+                localStorage.setItem('gitUsername', profile['github_account']);
+                console.log(localStorage.getItem('gitUsername'));
             })
 
         getGitHubAccount();
@@ -232,9 +234,12 @@ class UserProfile extends Component {
                                 name={localStorage.getItem('first_name') + ' ' + localStorage.getItem('last_name')}
                                 userName={localStorage.getItem('username')}
                                 description={
-                                    <span>
+                                    <div>
+                                        <br />
+                                        <span>
                                         {'GitHub username: ' + localStorage.getItem('gitUsername')}
-                  </span>
+                                    </span>
+                                    </div>
                                 }
                                 image={
                                     <img src={localStorage.getItem('userAvatar')} alt="Logo" />

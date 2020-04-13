@@ -9,24 +9,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
-import * as firebase from "firebase";
 import App, {handleLogin} from "../App";
 
-const config = {
-    apiKey: 'AIzaSyBPf_Gm3WRJ90cLFYw6rvjX6IpSADdh8V0',
-    authDomain: 'git-issue-tracker.firebaseapp.com',
-    databaseURL: 'https://git-issue-tracker.firebaseio.com',
-    projectId: 'git-issue-tracker',
-    storageBucket: 'git-issue-tracker.appspot.com',
-    messagingSenderId: '472733831305',
-    appId: '1:472733831305:web:6a3762e067271d2e79b658',
-    measurementId: 'G-EN0ZCYRR28',
-};
-
-firebase.initializeApp(config);
-
-const db = firebase.firestore();
+const base_url = 'http://127.0.0.1:8000/';
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -62,10 +47,48 @@ function getPassword() {
 }
 
 function onSignIn() {
+
+    getGitUsername();
+
      handleLogin({
         username : getUsername(),
-        password : getPassword()
+        password : getPassword(),
     })
+}
+
+function getGitUsername()
+{
+    let data = {
+        username: getUsername(),
+        password: getPassword(),
+    };
+
+    fetch(base_url + 'token-auth/', {
+		crossDomain : true,
+		withCredentials : true,
+		async : true,
+		method : 'POST',
+		headers : {
+			'Content-Type' : 'application/json',
+		},
+		body : JSON.stringify(data)
+	})
+		.then(response => response.json())
+		.then(json => {
+			localStorage.setItem('token', json.token);
+			localStorage.setItem('logged_in', true);
+			localStorage.setItem('username', json.user.username);
+			localStorage.setItem('first_name', json.user.first_name);
+			localStorage.setItem('last_name', json.user.last_name);
+			localStorage.setItem('email', json.user.email);
+			//getGitUsername();
+			console.log(localStorage.getItem('gitUsername'));
+			console.log(localStorage.getItem('token'));
+		})
+		.then(function(){
+            window.location.href = "/home/user";
+        	console.log(localStorage)
+		});
 }
 
 class SignIn extends Component{

@@ -11,11 +11,13 @@ export function handleLogout() {
 	localStorage.setItem('username', '');
 	localStorage.setItem('first_name', '');
 	localStorage.setItem('last_name', '');
+	localStorage.setItem('gitUsername', '');
 }
 
 export function handleLogin(data) {
-	// e.preventDefault();
-	console.log(data)
+
+	console.log(data);
+
 	fetch(base_url + 'token-auth/', {
 		crossDomain : true,
 		withCredentials : true,
@@ -33,15 +35,31 @@ export function handleLogin(data) {
 			localStorage.setItem('username', json.user.username);
 			localStorage.setItem('first_name', json.user.first_name);
 			localStorage.setItem('last_name', json.user.last_name);
-			localStorage.setItem('email', json.user.email)
-			localStorage.setItem('github', "Enter github account...")
+			localStorage.setItem('email', json.user.email);
+			getGitUsername();
+			console.log(localStorage.getItem('gitUsername'));
 			console.log(localStorage.getItem('token'));
 		})
 		.then(function(){
+			getGitUsername();
 			window.location.href = "/home/user";
         	console.log(localStorage)
 		})
 
+}
+
+function getGitUsername()
+{
+	fetch(base_url + 'profile/update_profile/get_current_profile', {
+            method : 'GET',
+            headers : {
+                Authorization : `JWT ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(profile => {
+                localStorage.setItem('gitUsername', profile['github_account']);
+            })
 }
 
 class App extends Component {

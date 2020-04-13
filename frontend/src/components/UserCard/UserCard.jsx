@@ -15,7 +15,9 @@ export class UserCard extends Component {
               {/*  src={this.props.avatar}*/}
               {/*  alt="..."*/}
               {/*/>*/}
-              <img src={localStorage.getItem('userAvatar')} alt="Logo" style={{height: 100, weight: 100}}/>
+              <img src={localStorage.getItem('userAvatar')} alt="Logo" style={{height: 200, weight: 200}}/>
+              <br />
+              <br />
               <h4 className="title">
                 {this.props.name}
                 <br />
