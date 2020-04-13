@@ -102,7 +102,12 @@ function getGitHubAccount() {
         headers : {
             Authorization : `JWT ${localStorage.getItem('token')}`
         }
-    }).then(result => console.log(result.json()));
+    }).then(result =>  result.json())
+        .then( res =>  {
+            localStorage.setItem('userAvatar', res.avatar_url);
+            localStorage.setItem('gitUsername', res.login);
+            localStorage.setItem('gitProfileUrl', res.html_url);
+        });
 }
 
 function updateCurrentUserData() {
@@ -143,12 +148,12 @@ class UserProfile extends Component {
         })
             .then(res => res.json())
             .then(profile => {
-                console.log("Mere ba pulaa!");
                 console.log('id user curent:' + profile['user']);
-                localStorage.setItem('current_user', profile['user']);
+                // localStorage.setItem('current_user', profile['user']);
             })
 
         getGitHubAccount();
+        console.log(getGithubAccount());
     }
 
     render() {
@@ -228,16 +233,16 @@ class UserProfile extends Component {
                                 userName={localStorage.getItem('username')}
                                 description={
                                     <span>
-                    "Project Manager/Normal User"
+                                        {'GitHub username: ' + localStorage.getItem('gitUsername')}
                   </span>
                                 }
                                 image={
-                                    <img src={'https://avatars1.githubusercontent.com/u/48677174?v=4'} alt="Logo" />
+                                    <img src={localStorage.getItem('userAvatar')} alt="Logo" />
                                 }
                                 socials={
                                     <div>
                                         <Button simple onClick={() => {
-                                            window.open(localStorage.getItem('github'))
+                                            window.open(localStorage.getItem('gitProfileUrl'))
                                         }}>
                                             <i className="fa fa-github-square fa-lg"/>
                                         </Button>
