@@ -14,12 +14,17 @@ import { UserCard } from "components/UserCard/UserCard.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 
 import Axios from "axios"
+import request from 'superagent';
 
 import SignIn from "./SignIn";
 
 const base_url = 'http://127.0.0.1:8000/';
 const GITHUB_URL = 'https://api.github.com/users/';
 
+let userGitCode;
+
+const client_id = '8829089279a0bad3e69c';
+const client_secret  = '2cb6f6ae182a54c3e435ff6ff66403d9fb131dd6';
 
 function getFirstName() {
 
@@ -96,7 +101,8 @@ function getNewGithubAccount() {
 
 }
 
-function getGitHubAccount() {
+function getGitHubAccount()
+{
     fetch(GITHUB_URL + localStorage.getItem('gitUsername'), {
         method : 'GET',
         headers : {
@@ -137,7 +143,43 @@ function updateCurrentUserData()
 
 }
 
+function gitAuthRedirect()
+{
+    window.location.href = 'https://github.com/login/oauth/authorize?client_id=8829089279a0bad3e69c';
+
+    // let callbackURL = window.location.href;
+    // let splitCallback = callbackURL.split('=');
+    // userGitCode = splitCallback[1];
+    //
+    // console.log(userGitCode);
+}
+
+function gitAccesToken(gitCode)
+{
+    let client_token;
+
+    request
+        .post('https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token')
+        .send({
+            client_id: client_id,
+            client_secret: client_secret,
+            code: gitCode,
+        })
+        .set('X-Requested-With', 'XMLHttpRequest')
+        .then(function(result){
+            console.log(result.body);
+            client_token = result.body.access_token;
+            console.log(client_token);
+        })
+}
+
 class UserProfile extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state={};
+    }
+
 
     componentDidMount() {
         fetch(base_url + 'profile/update_profile/get_current_profile', {
@@ -153,6 +195,17 @@ class UserProfile extends Component {
                 localStorage.setItem('gitUsername', profile['github_account']);
                 console.log(localStorage.getItem('gitUsername'));
             })
+
+        if(window.location.href.match('callback'))
+        {
+            let callbackURL = window.location.href;
+            let splitCallback = callbackURL.split('=');
+            userGitCode = splitCallback[1];
+
+            console.log(userGitCode);
+
+            gitAccesToken(userGitCode);
+        }
 
         getGitHubAccount();
         console.log(getGithubAccount());
@@ -223,6 +276,11 @@ class UserProfile extends Component {
                                                 style={{marginTop: 20, marginLeft: 20, _height: 30, _weigh: 40, bsSizes: 'large'}}
                                                 pullRight>
                                             Update Profile
+                                        </Button>
+                                        <Button onClick={() => gitAuthRedirect()}
+                                                style={{marginTop: 20, marginLeft: 20, _height: 30, _weigh: 40, bsSizes: 'large'}}
+                                                pullRight>
+                                            Authorize GitHub
                                         </Button>
                                         <div className="clearfix"/>
                                     </form>
