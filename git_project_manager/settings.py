@@ -101,10 +101,10 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'palgldor',
-        'USER': 'palgldor',
-        'PASSWORD': 'i9FrvVvRdLnS4KT7zNp-z6Xpnq5-qjqK',
-        'HOST': 'drona.db.elephantsql.com',
+        'NAME': 'sohhrjli',
+        'USER': 'sohhrjli',
+        'PASSWORD': 'rQvHJHxFU7P0TvCdsRsVnO1b0n3yr42R',
+        'HOST': 'rajje.db.elephantsql.com',
         'PORT': '5432',
     }
 }

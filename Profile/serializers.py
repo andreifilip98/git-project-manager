@@ -18,4 +18,4 @@ class ProfileSerializer(sz.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('user', 'github_account', 'projects', 'issues', 'added_on',)
+        fields = ('user', 'github_account', 'projects', 'issues', 'added_on', 'git_token',)

@@ -15,6 +15,7 @@ class Profile(models.Model):
     projects = models.ManyToManyField('project.Project', related_name='user_projects')
     issues = models.ManyToManyField('issue.Issue', related_name='user_issues')
     added_on = models.ManyToManyField('project.Project', related_name='added_on_project')
+    git_token = models.CharField(max_length=50, default='')
 
     def __str__(self):
         return self.user.username

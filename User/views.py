@@ -52,6 +52,7 @@ class UpdateUserView(APIView):
         current_user.profile.last_name = request.data.get('last_name')
         current_user.profile.email = request.data.get('email')
         current_user.profile.github_account = request.data.get('github')
+        current_user.profile.git_token = request.data.get('git_token')
 
         current_user.save()
         return Response({"response": "success", "message": "user updated successfully"})

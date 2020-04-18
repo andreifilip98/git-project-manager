@@ -3,9 +3,6 @@ import {
     Grid,
     Row,
     Col,
-    FormGroup,
-    ControlLabel,
-    FormControl
 } from "react-bootstrap";
 
 import { Card } from "components/Card/Card.jsx";
@@ -15,8 +12,6 @@ import Button from "components/CustomButton/CustomButton.jsx";
 
 import Axios from "axios"
 import request from 'superagent';
-
-import SignIn from "./SignIn";
 
 const base_url = 'http://127.0.0.1:8000/';
 const GITHUB_URL = 'https://api.github.com/users/';
@@ -56,6 +51,9 @@ function getGithubAccount() {
     return localStorage.getItem('gitUsername');
 }
 
+function getGitToken() {
+    return localStorage.getItem('gitToken');
+}
 
 function getNewUsername() {
 
@@ -146,12 +144,6 @@ function updateCurrentUserData()
 function gitAuthRedirect()
 {
     window.location.href = 'https://github.com/login/oauth/authorize?client_id=8829089279a0bad3e69c';
-
-    // let callbackURL = window.location.href;
-    // let splitCallback = callbackURL.split('=');
-    // userGitCode = splitCallback[1];
-    //
-    // console.log(userGitCode);
 }
 
 function gitAccesToken(gitCode)
@@ -170,7 +162,24 @@ function gitAccesToken(gitCode)
             console.log(result.body);
             client_token = result.body.access_token;
             console.log(client_token);
+            localStorage.setItem('gitToken', client_token);
+        }).then(
+        Axios.post(base_url + 'user/update_user/', {
+            'old_username': getOldUsername(),
+            'username': getNewUsername(),
+            'first_name': getNewFirstName(),
+            'last_name': getNewLastName(),
+            'email': getNewEmail(),
+            'github': getNewGithubAccount(),
+            'git_token': getGitToken(),
         })
+            .then(response => {
+                console.log(' ***User token posted!****')
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    )
 }
 
 class UserProfile extends Component {
@@ -179,7 +188,6 @@ class UserProfile extends Component {
         super(props);
         this.state={};
     }
-
 
     componentDidMount() {
         fetch(base_url + 'profile/update_profile/get_current_profile', {
@@ -190,11 +198,14 @@ class UserProfile extends Component {
         })
             .then(res => res.json())
             .then(profile => {
-                console.log('id user curent:' + profile['user']);
+
                 localStorage.setItem('current_user', profile['user']);
                 localStorage.setItem('gitUsername', profile['github_account']);
+                localStorage.setItem('gitToken', profile['git_token']);
+
                 console.log(localStorage.getItem('gitUsername'));
-            })
+                console.log(localStorage.getItem('gitToken'));
+            });
 
         if(window.location.href.match('callback'))
         {
