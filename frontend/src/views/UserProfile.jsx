@@ -125,13 +125,16 @@ function updateCurrentUserData()
         'github': getNewGithubAccount(),
     })
         .then(response => {
+
             console.log(response);
             console.log(response.status + " " + response.statusText);
+
             alert("User updated successfully!");
+
         })
         .catch(error => {
             console.log(error)
-        })
+        });
 
     localStorage.setItem('username', getNewUsername());
     localStorage.setItem('first_name', getNewFirstName());
@@ -159,11 +162,12 @@ function gitAccesToken(gitCode)
         })
         .set('X-Requested-With', 'XMLHttpRequest')
         .then(function(result){
+
             console.log(result.body);
             client_token = result.body.access_token;
-            console.log(client_token);
+            console.log(client_token + ' token response');
             localStorage.setItem('gitToken', client_token);
-        }).then(
+        }).then(response => {
         Axios.post(base_url + 'user/update_user/', {
             'old_username': getOldUsername(),
             'username': getNewUsername(),
@@ -171,15 +175,17 @@ function gitAccesToken(gitCode)
             'last_name': getNewLastName(),
             'email': getNewEmail(),
             'github': getNewGithubAccount(),
-            'git_token': getGitToken(),
+            'git_token': localStorage.getItem('gitToken'),
+        });
+        alert('GitHub account authorized!');
+            window.location.href = window.location.href.split('callback')[0];
+        }
+    ).then(result => {
+        console.log("Axios post done!    " + localStorage.getItem('gitToken'));
+    })
+        .catch(error => {
+            console.log(error)
         })
-            .then(response => {
-                console.log(' ***User token posted!****')
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    )
 }
 
 class UserProfile extends Component {
@@ -190,22 +196,7 @@ class UserProfile extends Component {
     }
 
     componentDidMount() {
-        fetch(base_url + 'profile/update_profile/get_current_profile', {
-            method : 'GET',
-            headers : {
-                Authorization : `JWT ${localStorage.getItem('token')}`
-            }
-        })
-            .then(res => res.json())
-            .then(profile => {
 
-                localStorage.setItem('current_user', profile['user']);
-                localStorage.setItem('gitUsername', profile['github_account']);
-                localStorage.setItem('gitToken', profile['git_token']);
-
-                console.log(localStorage.getItem('gitUsername'));
-                console.log(localStorage.getItem('gitToken'));
-            });
 
         if(window.location.href.match('callback'))
         {
@@ -216,10 +207,35 @@ class UserProfile extends Component {
             console.log(userGitCode);
 
             gitAccesToken(userGitCode);
+
+        }else
+        {
+            fetch(base_url + 'profile/update_profile/get_current_profile', {
+                method : 'GET',
+                headers : {
+                    Authorization : `JWT ${localStorage.getItem('token')}`
+                }
+            })
+                .then(res => res.json())
+                .then(profile => {
+
+                    console.log('id user curent:' + profile['user']);
+
+                    localStorage.setItem('current_user', profile['user']);
+                    localStorage.setItem('gitUsername', profile['github_account']);
+                    localStorage.setItem('gitToken', profile['git_token']);
+                    console.log(profile['git_token'] + 'current profile token');
+
+                    console.log(localStorage.getItem('gitUsername'));
+                    console.log(localStorage.getItem('gitToken'));
+
+
+                });
         }
 
-        getGitHubAccount();
+        //getGitHubAccount();
         console.log(getGithubAccount());
+        console.log(getGitToken());
     }
 
     render() {
@@ -288,7 +304,7 @@ class UserProfile extends Component {
                                                 pullRight>
                                             Update Profile
                                         </Button>
-                                        <Button onClick={() => gitAuthRedirect()}
+                                        <Button onClick={() => gitAuthRedirect()} id='gitButton'
                                                 style={{marginTop: 20, marginLeft: 20, _height: 30, _weigh: 40, bsSizes: 'large'}}
                                                 pullRight>
                                             Authorize GitHub
