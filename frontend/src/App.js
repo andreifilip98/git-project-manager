@@ -36,12 +36,12 @@ export function handleLogin(data) {
 			localStorage.setItem('first_name', json.user.first_name);
 			localStorage.setItem('last_name', json.user.last_name);
 			localStorage.setItem('email', json.user.email);
-			getGitUsername();
+			//getGitUsername();
 			console.log(localStorage.getItem('gitUsername'));
 			console.log(localStorage.getItem('token'));
 		})
 		.then(function(){
-			getGitUsername();
+			//getGitUsername();
 			window.location.href = "/home/user";
         	console.log(localStorage)
 		})
@@ -58,7 +58,7 @@ function getGitUsername()
         })
             .then(res => res.json())
             .then(profile => {
-                localStorage.setItem('gitUsername', profile['github_account']);
+                //localStorage.setItem('gitUsername', profile['github_account']);
             })
 }
 

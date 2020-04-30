@@ -409,7 +409,7 @@ class ProjectView extends Component {
                                                 </tbody>
                                             </Table>
                                             <div
-                                                style={{display: localStorage.getItem('priority') == 'owner' ? 'block' : 'none'}}>
+                                                style={{display: localStorage.getItem('priority') === 'owner' ? 'block' : 'none'}}>
                                                 <Col md={8}>
                                                     <FormInputs
                                                         ncols={["col-lg-30"]}

@@ -14,7 +14,7 @@ import Axios from "axios"
 import request from 'superagent';
 
 const base_url = 'http://127.0.0.1:8000/';
-const GITHUB_URL = 'https://api.github.com/users/';
+const GITHUB_URL = 'https://api.github.com/';
 
 let userGitCode;
 
@@ -46,7 +46,7 @@ function getEmail() {
     return localStorage.getItem('email');
 }
 
-function getGithubAccount() {
+function getGithubUsername() {
 
     return localStorage.getItem('gitUsername');
 }
@@ -99,7 +99,7 @@ function getNewGithubAccount() {
 
 }
 
-function getGitHubAccount()
+function fetchGitHubPublicData()
 {
     fetch(GITHUB_URL + localStorage.getItem('gitUsername'), {
         method : 'GET',
@@ -114,6 +114,37 @@ function getGitHubAccount()
         });
 }
 
+function fetchGitRepos()
+{
+    // fetch('https://cors-anywhere.herokuapp.com/https://api.github.com/user/repos?page=1&per_page=100', {
+    //     method : 'GET',
+    //     headers : {
+    //         'Authorization': 'Bearer <localStorage.getItem(\'gitToken\')>',
+    //         'X-GitHub-Media-Type': 'github.v3; param=full; format=json',
+    //         'Accept': 'application/vnd.github.v3.full+json',
+    //         'X-Requested-With': 'XMLHttpRequest',
+    //     }
+    // }).then(result =>  result.json())
+    //     .then( res =>  {
+    //         console.log(res);
+    //     });
+
+    request
+        .get('https://cors-anywhere.herokuapp.com/https://api.github.com/andreifilip98/repos')
+        // .send({
+        //     client_id: client_id,
+        //     client_secret: client_secret,
+        //     code: gitCode,
+        // })
+        .set('Authorization', `Bearer ${localStorage.getItem('gitToken')}`)
+        .set('Accept', 'application/vnd.github.full+json')
+        .set('X-GitHub-Media-Type', 'github.v3')
+        .then(function(result){
+            console.log(result);
+
+        })
+}
+
 function updateCurrentUserData()
 {
     Axios.post(base_url + 'user/update_user/', {
@@ -122,7 +153,6 @@ function updateCurrentUserData()
         'first_name': getNewFirstName(),
         'last_name': getNewLastName(),
         'email': getNewEmail(),
-        'github': getNewGithubAccount(),
     })
         .then(response => {
 
@@ -140,7 +170,6 @@ function updateCurrentUserData()
     localStorage.setItem('first_name', getNewFirstName());
     localStorage.setItem('last_name', getNewLastName());
     localStorage.setItem('email', getNewEmail());
-    localStorage.setItem('gitUsername', getNewGithubAccount());
 
 }
 
@@ -168,16 +197,15 @@ function gitAccesToken(gitCode)
             console.log(client_token + ' token response');
             localStorage.setItem('gitToken', client_token);
         }).then(response => {
-        Axios.post(base_url + 'user/update_user/', {
-            'old_username': getOldUsername(),
-            'username': getNewUsername(),
-            'first_name': getNewFirstName(),
-            'last_name': getNewLastName(),
-            'email': getNewEmail(),
-            'github': getNewGithubAccount(),
-            'git_token': localStorage.getItem('gitToken'),
-        });
-        alert('GitHub account authorized!');
+            Axios.post(base_url + 'user/update_user/', {
+                'old_username': getOldUsername(),
+                'username': getNewUsername(),
+                'first_name': getNewFirstName(),
+                'last_name': getNewLastName(),
+                'email': getNewEmail(),
+                'git_token': localStorage.getItem('gitToken'),
+            });
+            alert('GitHub account authorized!');
             window.location.href = window.location.href.split('callback')[0];
         }
     ).then(result => {
@@ -222,19 +250,11 @@ class UserProfile extends Component {
                     console.log('id user curent:' + profile['user']);
 
                     localStorage.setItem('current_user', profile['user']);
-                    localStorage.setItem('gitUsername', profile['github_account']);
                     localStorage.setItem('gitToken', profile['git_token']);
-                    console.log(profile['git_token'] + 'current profile token');
-
-                    console.log(localStorage.getItem('gitUsername'));
-                    console.log(localStorage.getItem('gitToken'));
-
-
+                    console.log( ' *CURRENT PROFILE TOKEN*  ' + profile['git_token']);
                 });
         }
 
-        //getGitHubAccount();
-        console.log(getGithubAccount());
         console.log(getGitToken());
     }
 
@@ -287,18 +307,6 @@ class UserProfile extends Component {
                                                 }
                                             ]}
                                         />
-                                        <FormInputs
-                                            ncols={["col-md-12"]}
-                                            properties={[
-                                                {
-                                                    label: "GitHub account",
-                                                    type: "character",
-                                                    id: "github",
-                                                    bsClass: "form-control",
-                                                    placeholder: getGithubAccount(),
-                                                }
-                                            ]}
-                                        />
                                         <Button onClick={() => updateCurrentUserData()}
                                                 style={{marginTop: 20, marginLeft: 20, _height: 30, _weigh: 40, bsSizes: 'large'}}
                                                 pullRight>
@@ -309,6 +317,9 @@ class UserProfile extends Component {
                                                 pullRight>
                                             Authorize GitHub
                                         </Button>
+                                        {/*<Button onClick={() => fetchGitRepos()}>*/}
+                                        {/*    Get GitHub Repos*/}
+                                        {/*</Button>*/}
                                         <div className="clearfix"/>
                                     </form>
                                 }
@@ -322,13 +333,15 @@ class UserProfile extends Component {
                                     <div>
                                         <br />
                                         <span>
-                                        {'GitHub username: ' + localStorage.getItem('gitUsername')}
+                                        { localStorage.getItem('gitUsername') !== '' ? 'GitHub username: ' + localStorage.getItem('gitUsername') : ''}
                                     </span>
                                     </div>
                                 }
                                 image={
-                                    <img src={localStorage.getItem('userAvatar')} alt="Logo" />
+                                    <img
+                                        src={localStorage.getItem('userAvatar')} alt="Logo"/>
                                 }
+
                                 socials={
                                     <div>
                                         <Button simple onClick={() => {
