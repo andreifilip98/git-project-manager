@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 import {Grid, Row, Col, Table, OverlayTrigger, Tooltip, Popover, Overlay} from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
-import { thArray, tdArray, repoArray } from "variables/Variables.jsx";
+import { repoArray } from "variables/Variables.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 import {SolarSystemLoading} from "react-loadingg";
 import request from "superagent";
 
-let projectPath = '/home/repos/';
 let createProjectPath = '/home/createrepo';
-
-let projectsArray = [];
-let otherProjectsArray = [];
 
 const base_url = 'http://127.0.0.1:8000/';
 
@@ -29,10 +25,6 @@ function deleteProject(project) {
 }
 
 let repos;
-
-let loading = true;
-
-
 
 class Repositories extends Component {
 

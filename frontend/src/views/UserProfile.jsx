@@ -14,7 +14,6 @@ import Axios from "axios"
 import request from 'superagent';
 
 const base_url = 'http://127.0.0.1:8000/';
-const GITHUB_URL = 'https://api.github.com/';
 
 let userGitCode;
 
@@ -169,30 +168,6 @@ function gitAccesToken(gitCode)
             console.log(error)
         })
 }
-
-// function getGitUser()
-// {
-//     request
-//         .get('https://cors-anywhere.herokuapp.com/http://api.github.com/user')
-//         .set('Authorization', `Bearer ${localStorage.getItem('gitToken')}`)
-//         .set('Accept', '*/*')
-//         .set('Content-Type', 'application/json')
-//         .set('X-GitHub-Media-Type', 'github.v3')
-//         .then(result => result.body)
-//         .then(result => {
-//
-//             console.log(result.login);
-//
-//             localStorage.setItem('gitUsername', result.login);
-//             localStorage.setItem('userAvatar', result.avatar_url);
-//             localStorage.setItem('gitUsername', result.login);
-//             localStorage.setItem('gitProfileUrl', result.html_url);
-//         })
-//         .then(this.forceUpdateHandler = this.forceUpdateHandler.bind(this))
-//         .catch(error => {
-//             console.log(error)
-//         })
-// }
 
 class UserProfile extends Component {
 
