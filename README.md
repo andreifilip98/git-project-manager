@@ -2,6 +2,8 @@
 
 Git Issue Tracker is a Single Page Application used for managing git projects. The client is able to create new projects with all the needed details, to be part of other projects and create issues inside projects, with all the details from a git repo.
 
+UPDATE: New important feature will be released soon. Github authentication will be available so the user will be able to manage his own github projects in a user friendly UI. Practicaly this update will transform the app in a project manager especially for github users.
+
 ## Setup
 
 ### Make sure that you have installed NodeJS   
