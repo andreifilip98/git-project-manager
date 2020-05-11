@@ -99,52 +99,6 @@ function getNewGithubAccount() {
 
 }
 
-function fetchGitHubPublicData()
-{
-    fetch(GITHUB_URL + localStorage.getItem('gitUsername'), {
-        method : 'GET',
-        headers : {
-            Authorization : `JWT ${localStorage.getItem('token')}`
-        }
-    }).then(result =>  result.json())
-        .then( res =>  {
-            localStorage.setItem('userAvatar', res.avatar_url);
-            localStorage.setItem('gitUsername', res.login);
-            localStorage.setItem('gitProfileUrl', res.html_url);
-        });
-}
-
-function fetchGitRepos()
-{
-    // fetch('https://cors-anywhere.herokuapp.com/https://api.github.com/user/repos?page=1&per_page=100', {
-    //     method : 'GET',
-    //     headers : {
-    //         'Authorization': 'Bearer <localStorage.getItem(\'gitToken\')>',
-    //         'X-GitHub-Media-Type': 'github.v3; param=full; format=json',
-    //         'Accept': 'application/vnd.github.v3.full+json',
-    //         'X-Requested-With': 'XMLHttpRequest',
-    //     }
-    // }).then(result =>  result.json())
-    //     .then( res =>  {
-    //         console.log(res);
-    //     });
-
-    request
-        .get('https://cors-anywhere.herokuapp.com/https://api.github.com/andreifilip98/repos')
-        // .send({
-        //     client_id: client_id,
-        //     client_secret: client_secret,
-        //     code: gitCode,
-        // })
-        .set('Authorization', `Bearer ${localStorage.getItem('gitToken')}`)
-        .set('Accept', 'application/vnd.github.full+json')
-        .set('X-GitHub-Media-Type', 'github.v3')
-        .then(function(result){
-            console.log(result);
-
-        })
-}
-
 function updateCurrentUserData()
 {
     Axios.post(base_url + 'user/update_user/', {
@@ -216,36 +170,64 @@ function gitAccesToken(gitCode)
         })
 }
 
-function getGitUser()
-{
-    request
-        .get('https://cors-anywhere.herokuapp.com/http://api.github.com/user')
-        .set('Authorization', `Bearer ${localStorage.getItem('gitToken')}`)
-        .set('Accept', '*/*')
-        .set('Content-Type', 'application/json')
-        .set('X-GitHub-Media-Type', 'github.v3')
-        .then(result => result.body)
-        .then(result => {
-            console.log(result.login);
-            localStorage.setItem('gitUsername', result.login);
-        })
-        .catch(error => {
-            console.log(error)
-        })
-}
+// function getGitUser()
+// {
+//     request
+//         .get('https://cors-anywhere.herokuapp.com/http://api.github.com/user')
+//         .set('Authorization', `Bearer ${localStorage.getItem('gitToken')}`)
+//         .set('Accept', '*/*')
+//         .set('Content-Type', 'application/json')
+//         .set('X-GitHub-Media-Type', 'github.v3')
+//         .then(result => result.body)
+//         .then(result => {
+//
+//             console.log(result.login);
+//
+//             localStorage.setItem('gitUsername', result.login);
+//             localStorage.setItem('userAvatar', result.avatar_url);
+//             localStorage.setItem('gitUsername', result.login);
+//             localStorage.setItem('gitProfileUrl', result.html_url);
+//         })
+//         .then(this.forceUpdateHandler = this.forceUpdateHandler.bind(this))
+//         .catch(error => {
+//             console.log(error)
+//         })
+// }
 
 class UserProfile extends Component {
+
+    getGitUser()
+    {
+        request
+            .get('https://cors-anywhere.herokuapp.com/http://api.github.com/user')
+            .set('Authorization', `Bearer ${localStorage.getItem('gitToken')}`)
+            .set('Accept', '*/*')
+            .set('Content-Type', 'application/json')
+            .set('X-GitHub-Media-Type', 'github.v3')
+            .then(result => result.body)
+            .then(result => {
+
+                console.log(result.login);
+
+                localStorage.setItem('gitUsername', result.login);
+                localStorage.setItem('userAvatar', result.avatar_url);
+                localStorage.setItem('gitUsername', result.login);
+                localStorage.setItem('gitProfileUrl', result.html_url);
+            })
+            .then(this.forceUpdateHandler = this.forceUpdateHandler.bind(this))
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
     constructor(props) {
         super(props);
         this.state={};
-
-        if(localStorage.getItem('gitToken'))
-        {
-            getGitUser();
-        }
     }
 
+    forceUpdateHandler(){
+        this.forceUpdate();
+    };
 
     componentDidMount() {
 
@@ -280,6 +262,8 @@ class UserProfile extends Component {
         }
 
         console.log(getGitUserToken());
+
+        this.getGitUser();
     }
 
     render() {
@@ -344,9 +328,6 @@ class UserProfile extends Component {
                                         <Button style={{marginTop: 20, marginLeft: 20, _height: 30, _weigh: 40, bsSizes: 'large'}}>
                                             Post GitHub
                                         </Button>
-                                        {/*<Button onClick={() => fetchGitRepos()}>*/}
-                                        {/*    Get GitHub Repos*/}
-                                        {/*</Button>*/}
                                         <div className="clearfix"/>
                                     </form>
                                 }

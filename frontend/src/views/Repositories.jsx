@@ -12,7 +12,7 @@ let createProjectPath = '/home/createrepo';
 let projectsArray = [];
 let otherProjectsArray = [];
 
-const base_url = 'http://127.0.0.1:8000/'
+const base_url = 'http://127.0.0.1:8000/';
 
 const remove = <Tooltip id="remove_tooltip">Remove</Tooltip>;
 
