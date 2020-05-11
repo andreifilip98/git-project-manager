@@ -1,6 +1,6 @@
 # Git Issue Tracker
 
-Git Issue Tracker is a Single Page Application used for managing git projects. The client is able to create new projects with all the needed details, to be part of other projects and create issues inside projects, with all details from a git repo.
+Git Issue Tracker is a Single Page Application used for managing git projects. The client is able to create new projects with all the needed details, to be part of other projects and create issues inside projects, with all the details from a git repo.
 
 ## Setup
 
