@@ -6,6 +6,7 @@ import SignIn from "./views/SignIn";
 import CreateProject from "views/CreateProject.jsx";
 import CreateIssue from "./views/CreateIssue";
 import IssueView from "./views/IssueView";
+import Repositories from "./views/Repositories";
 
 const dashboardRoutes = [
   {
@@ -44,6 +45,13 @@ const dashboardRoutes = [
     path: "/createissue",
     name: "New Issue",
     component: CreateIssue,
+    layout: "/home"
+  },
+  {
+    path: "/repos",
+    name: "Repositories",
+    icon: "fa fa-github-square fa-lg",
+    component: Repositories,
     layout: "/home"
   },
   // {

@@ -244,6 +244,8 @@ var style = {
 // // // For tables
 // //
 //
+const repoArray = ["ID", "Name", "Owner"];
+
 const thArray = ["ID", "Name", "Description"];
 const tdArray = [
   ["1", "Dakota Rice", "Niger", "Oud-Turnhout"],
@@ -601,5 +603,6 @@ module.exports = {
   dataBar,
   optionsBar,
   responsiveBar,
-  legendBar // For charts (ProjectView view)
+  legendBar, // For charts (ProjectView view)
+  repoArray,
 };
