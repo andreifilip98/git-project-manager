@@ -128,7 +128,7 @@ function updateCurrentUserData()
 
 function gitAuthRedirect()
 {
-    window.location.href = 'https://github.com/login/oauth/authorize?client_id=8829089279a0bad3e69c';
+    window.location.href = 'https://github.com/login/oauth/authorize?client_id=8829089279a0bad3e69c&scope=repo%20delete_repo';
 }
 
 function gitAccesToken(gitCode)
@@ -174,7 +174,7 @@ class UserProfile extends Component {
     getGitUser()
     {
         request
-            .get('https://cors-anywhere.herokuapp.com/http://api.github.com/user')
+            .get('https://cors-anywhere.herokuapp.com/https://api.github.com/user')
             .set('Authorization', `Bearer ${localStorage.getItem('gitToken')}`)
             .set('Accept', '*/*')
             .set('Content-Type', 'application/json')
@@ -198,6 +198,8 @@ class UserProfile extends Component {
     constructor(props) {
         super(props);
         this.state={};
+
+        this.getGitUser();
     }
 
     forceUpdateHandler(){
@@ -237,8 +239,6 @@ class UserProfile extends Component {
         }
 
         console.log(getGitUserToken());
-
-        this.getGitUser();
     }
 
     render() {
@@ -299,9 +299,6 @@ class UserProfile extends Component {
                                                 style={{marginTop: 20, marginLeft: 20, _height: 30, _weigh: 40, bsSizes: 'large'}}
                                                 pullRight>
                                             Authorize GitHub
-                                        </Button>
-                                        <Button style={{marginTop: 20, marginLeft: 20, _height: 30, _weigh: 40, bsSizes: 'large'}}>
-                                            Post GitHub
                                         </Button>
                                         <div className="clearfix"/>
                                     </form>

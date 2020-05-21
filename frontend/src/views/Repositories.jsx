@@ -6,22 +6,27 @@ import Button from "components/CustomButton/CustomButton.jsx";
 import {SolarSystemLoading} from "react-loadingg";
 import request from "superagent";
 
-let createProjectPath = '/home/createrepo';
+let createRepoPath = '/home/createrepo';
 
 const base_url = 'http://127.0.0.1:8000/';
+const local_url = 'http://localhost:3000';
 
-const remove = <Tooltip id="remove_tooltip">Remove</Tooltip>;
+const remove = <Tooltip id="remove_tooltip"> Remove </Tooltip>;
 
-function deleteProject(project) {
-    fetch(base_url + 'project/delete_project/' + project + '/',{
-        crossDomain : true,
-        method : 'DELETE',
-        headers : {
-            Authorization : `JWT ${localStorage.getItem('token')}`,
-            'Content-Type' : 'application/json',
-        }
-    })
-        .then(res => console.log(res))
+function deleteRepo(repo) {
+
+    request
+        .delete(`https://cors-anywhere.herokuapp.com/https://api.github.com/repos/${localStorage.getItem('gitUsername')}/${repo}`)
+        .set('Authorization', `Bearer ${localStorage.getItem('gitToken')}`)
+        .set('Accept', '*/*')
+        .set('Content-Type', 'application/vnd.github.nebula-preview+json')
+        .then((result) => {
+            console.log(result);
+            alert('Repository has been deleted!');
+        })
+        .catch(error => {
+            console.log(error)
+        })
 }
 
 let repos;
@@ -44,7 +49,6 @@ class Repositories extends Component {
                     loading: false
                 });
             })
-            .then(this.forceUpdateHandler = this.forceUpdateHandler.bind(this))
             .catch(error => {
                 console.log(error)
             })
@@ -57,14 +61,6 @@ class Repositories extends Component {
             userProjects: ""
         };
 
-
-    }
-
-    forceUpdateHandler(){
-        this.forceUpdate();
-    };
-
-    componentDidMount() {
         this.getRepos();
     }
 
@@ -101,7 +97,7 @@ class Repositories extends Component {
                                                     <td key={key}>{repos[key].owner.login}</td>
 
                                                     <OverlayTrigger placement="top" overlay={remove}>
-                                                        <Button bsStyle="danger" simple type="button" bsSize="xl" onClick={(event) => {deleteProject(prop[1]);event.stopPropagation()}}>
+                                                        <Button bsStyle="danger" simple type="button" bsSize="xl" onClick={(event) => {deleteRepo(repos[key].name); event.stopPropagation()}}>
                                                             <i className="fa fa-times" />
                                                         </Button>
                                                     </OverlayTrigger>
@@ -116,7 +112,7 @@ class Repositories extends Component {
 
                                         <Button style={{marginTop: 20, marginLeft: 20, _height: 30, _weigh: 40, bsSizes: 'large'}}
                                                 onClick={() => {
-                                                    window.location.href = createProjectPath
+                                                    window.location.href = createRepoPath;
                                                 }}>
                                             Create Repository
                                         </Button>

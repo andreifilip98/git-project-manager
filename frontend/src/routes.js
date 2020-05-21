@@ -7,6 +7,7 @@ import CreateProject from "views/CreateProject.jsx";
 import CreateIssue from "./views/CreateIssue";
 import IssueView from "./views/IssueView";
 import Repositories from "./views/Repositories";
+import CreateRepo from "./views/CreateRepo";
 
 const dashboardRoutes = [
   {
@@ -52,6 +53,12 @@ const dashboardRoutes = [
     name: "Repositories",
     icon: "fa fa-github-square fa-lg",
     component: Repositories,
+    layout: "/home"
+  },
+    {
+    path: "/createrepo",
+    name: "New Repository",
+    component: CreateRepo,
     layout: "/home"
   },
   // {
