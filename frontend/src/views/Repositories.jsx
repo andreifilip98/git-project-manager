@@ -10,6 +10,7 @@ let createRepoPath = '/home/createrepo';
 
 const base_url = 'http://127.0.0.1:8000/';
 const local_url = 'http://localhost:3000';
+const deploy_url = 'https://7753864ba8a6.ngrok.io/';
 
 const remove = <Tooltip id="remove_tooltip"> Remove </Tooltip>;
 
@@ -49,6 +50,7 @@ class Repositories extends Component {
                     loading: false
                 });
             })
+            .then(this.forceUpdateHandler = this.forceUpdateHandler.bind(this))
             .catch(error => {
                 console.log(error)
             })
@@ -61,6 +63,14 @@ class Repositories extends Component {
             userProjects: ""
         };
 
+        //this.getRepos();
+    }
+
+    forceUpdateHandler(){
+        this.forceUpdate();
+    };
+
+    componentDidMount() {
         this.getRepos();
     }
 
@@ -97,7 +107,7 @@ class Repositories extends Component {
                                                     <td key={key}>{repos[key].owner.login}</td>
 
                                                     <OverlayTrigger placement="top" overlay={remove}>
-                                                        <Button bsStyle="danger" simple type="button" bsSize="xl" onClick={(event) => {deleteRepo(repos[key].name); event.stopPropagation()}}>
+                                                        <Button bsStyle="danger" simple type="button" bsSize="xl" onClick={(event) => {deleteRepo(repos[key].name); event.stopPropagation(); delete repos[key]}}>
                                                             <i className="fa fa-times" />
                                                         </Button>
                                                     </OverlayTrigger>

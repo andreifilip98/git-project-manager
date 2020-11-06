@@ -49,7 +49,7 @@ class Sidebar extends Component {
           <a
             className="simple-text logo-normal"
           >
-            Issue Tracker
+            Project Manager
           </a>
         </div>
         <div className="sidebar-wrapper" >

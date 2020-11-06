@@ -12,6 +12,7 @@ import Container from '@material-ui/core/Container';
 import App, {handleLogin} from "../App";
 
 const base_url = 'http://127.0.0.1:8000/';
+const deploy_url = 'https://7753864ba8a6.ngrok.io/';
 
 const useStyles = makeStyles(theme => ({
     '@global': {

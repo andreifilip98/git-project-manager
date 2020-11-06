@@ -18,6 +18,7 @@ import request from 'superagent';
 
 const base_url = 'http://127.0.0.1:8000/';
 const host_url = 'http://localhost:3000/';
+const deploy_url = 'https://7753864ba8a6.ngrok.io/';
 const git_url = 'https://cors-anywhere.herokuapp.com/https://api.github.com/user/';
 
 let selectedPriority;
@@ -57,7 +58,7 @@ function postRepo() {
         .then((result) => {
             console.log(result);
             alert(result.body.name + ' repository has been created!');
-            window.location.href = host_url + 'home/repos';
+            window.location.href = base_url + 'home/repos';
         })
         .catch(error => {
             console.log(error)

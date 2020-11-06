@@ -38,6 +38,7 @@ const priorities = [
 ];
 
 const base_url = 'http://127.0.0.1:8000/';
+const deploy_url = 'https://7753864ba8a6.ngrok.io/';
 
 function getTitle () {
     return document.getElementById("title").value;

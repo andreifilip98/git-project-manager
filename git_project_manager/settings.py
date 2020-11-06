@@ -25,7 +25,7 @@ SECRET_KEY = '#1t%i8r!3fhl0ydnb-(lrh%6^(7q+w%b*a*cf*e5skoi$ig15c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=1))
 
-ALLOWED_HOSTS = ['127.0.0.1', 'fc5e0aac.ngrok.io', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'http://127.0.0.1:8000/', 'localhost']
 
 # Application definition
 
@@ -78,7 +78,6 @@ TEMPLATES = [
     {
         'DIRS': [TEMPLATE_DIR],
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -101,11 +100,10 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sohhrjli',
-        'USER': 'sohhrjli',
-        'PASSWORD': 'rQvHJHxFU7P0TvCdsRsVnO1b0n3yr42R',
-        'HOST': 'rajje.db.elephantsql.com',
+        'USER': 'filipandrei',
+        'NAME': 'filipandrei',
         'PORT': '5432',
+        'HOST': '127.0.0.1',
     }
 }
 

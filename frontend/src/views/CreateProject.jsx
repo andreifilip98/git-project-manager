@@ -14,6 +14,7 @@ import FormData from "form-data";
 
 
 const base_url = 'http://127.0.0.1:8000/';
+const deploy_url = 'https://7753864ba8a6.ngrok.io/';
 
 function getDescription () {
     return document.getElementById("exampleFormControlTextarea1").value;
