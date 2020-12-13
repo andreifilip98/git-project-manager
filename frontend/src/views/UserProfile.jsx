@@ -245,7 +245,7 @@ class UserProfile extends Component {
     render() {
 
         return (
-            <div className="content">
+            <div data-testid="button" className="content">
                 <Grid fluid>
                     <Row>
                         <Col md={8}>

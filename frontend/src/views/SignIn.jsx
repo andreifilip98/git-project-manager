@@ -112,6 +112,7 @@ class SignIn extends Component{
                     </Typography>
                     <div className={classes.form} noValidate>
                         <TextField
+                            data-testid='username'
                             variant="outlined"
                             margin="normal"
                             required
@@ -123,6 +124,7 @@ class SignIn extends Component{
                             autoFocus
                         />
                         <TextField
+                            data-testid='pass'
                             variant="outlined"
                             margin="normal"
                             required
@@ -139,6 +141,7 @@ class SignIn extends Component{
                             label="Remember me"
                         />
                         <Button
+                            data-testid='submit'
                             onClick={() => onSignIn()}
                             type="submit"
                             fullWidth

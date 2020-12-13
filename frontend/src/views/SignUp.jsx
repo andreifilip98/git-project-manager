@@ -137,6 +137,7 @@ class SignUp extends Component {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    data-testid='username'
                                     variant="outlined"
                                     required
                                     fullWidth
@@ -149,6 +150,7 @@ class SignUp extends Component {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    data-testid='pass'
                                     variant="outlined"
                                     required
                                     fullWidth
@@ -167,6 +169,7 @@ class SignUp extends Component {
                                 variant="contained"
                                 color="primary"
                                 className={classes.submit}
+                                data-testid='signup'
                         >
                             Sign Up
                         </Button>

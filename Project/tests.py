@@ -16,3 +16,4 @@ class RegistrationTestCase(APITestCase):
         response = self.client.get("http://127.0.0.1:8000/project/project/get_projects", format='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+

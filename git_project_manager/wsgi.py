@@ -1,5 +1,6 @@
 """
-WSGI config for git_project_manager project.
+WSGI config for 
+git_project_manager project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
